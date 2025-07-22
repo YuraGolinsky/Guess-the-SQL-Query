@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guess the SQL Query - Level Up!</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+  <div class="container" role="main">
+    <h1 id="title">Guess the SQL Query</h1>
+    <div id="scoreboard" aria-live="polite">Score: 0 | Level: 1</div>
+
+    <label for="lang">🌐 Language / Мова:</label>
+    <select id="lang" aria-label="Select language">
+      <option value="en">English</option>
+      <option value="uk">Українська</option>
+    </select>
+
+    <h2 id="levelTitle">Level 1</h2>
+    <p id="taskDescription"></p>
+
+    <div class="schema" id="schema"></div>
+    <div class="expected-result" id="expectedResult"></div>
+
+    <label for="query" id="queryLabel">Enter your SQL query:</label>
+    <textarea id="query" placeholder="SELECT ..."></textarea>
+
+    <button id="checkBtn">Check</button>
+    <div class="feedback" id="feedback" aria-live="assertive"></div>
+
+    <div class="query-options" id="queryOptions"></div>
+
+    <button id="nextLevel" style="display:none; margin-top: 20px;">Next Level</button>
+  </div>
+<button id="helpBtn" title="Help / Допомога">❔</button>
+
+<div id="helpBox" style="display: none;">
+  <strong>🎮 How to Play / Як грати:</strong><br><br>
+  🧠 Write an SQL query that gives the expected result.<br>
+  🧠 Напиши SQL-запит, який дає очікуваний результат.<br><br>
+
+  🗃️ Check the schema and expected result.<br>
+  🗃️ Переглянь схему таблиці та очікуваний результат.<br><br>
+
+  ▶️ Click “Check” to test your query.<br>
+  ▶️ Натисни “Check”, щоб перевірити запит.<br><br>
+
+  ⭐ Advance through levels to improve your SQL!<br>
+  ⭐ Проходь рівні, щоб покращити свої знання SQL!<br><br>
+</div>
+
+
+<script>
+  const helpBtn = document.getElementById('helpBtn');
+  const helpBox = document.getElementById('helpBox');
+
+  helpBtn.addEventListener('click', () => {
+    helpBox.style.display = helpBox.style.display === 'none' ? 'block' : 'none';
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!helpBox.contains(e.target) && e.target !== helpBtn) {
+      helpBox.style.display = 'none';
+    }
+  });
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const helpBtn = document.getElementById("helpBtn");
+    const helpBox = document.getElementById("helpBox");
+
+    helpBtn.addEventListener("click", function () {
+      helpBox.classList.toggle("active");
+    });
+  });
+</script>
+
+  <script src="js/levels.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
